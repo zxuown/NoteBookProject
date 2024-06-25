@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FFFFFF">
+    <item
+        android:id="@+id/action_login"
+        android:title="Login"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_register"
+        android:title="Register"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_exit"
+        android:title="Exit"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>
