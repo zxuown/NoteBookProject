@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="#FFFFFF">
+    android:backgroundTint="#FFFFFF"
+    >
     <item
         android:id="@+id/action_login"
         android:title="Login"
@@ -9,6 +10,11 @@
     <item
         android:id="@+id/action_register"
         android:title="Register"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_edit_user"
+        android:title="Edit user"
         android:orderInCategory="100"
         app:showAsAction="never" />
     <item

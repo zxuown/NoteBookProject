@@ -44,4 +44,7 @@ public interface Api {
 
     @POST("/auth/register")
     Call<String> register(@Body AuthRequest body);
+
+    @POST("/user/update")
+    Call<String> updateUser(@Header("Authorization") String authHeader, @Body User body);
 }

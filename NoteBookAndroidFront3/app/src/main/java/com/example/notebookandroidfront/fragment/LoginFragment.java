@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.notebookandroidfront.MainActivity;
 import com.example.notebookandroidfront.R;
 import com.example.notebookandroidfront.model.User;
 import com.example.notebookandroidfront.service.UserService;
@@ -35,6 +36,9 @@ public class LoginFragment extends Fragment {
             UserService.getInstance().login(email,password, new UserService.AuthorizationCallback() {
                 @Override
                 public void onAuthorized(User user) {
+                    ((MainActivity) requireActivity()).isLoggedIn = true;
+                    ((MainActivity) requireActivity()).isUserEdit = true;
+                    requireActivity().invalidateOptionsMenu();
                     requireActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragmentContainerView, new MainFragment())
                             .commit();

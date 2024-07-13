@@ -4,11 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AuthRequest {
-    @Expose
-    @SerializedName("email")
+
     private String email;
-    @Expose
-    @SerializedName("password")
+
     private String password;
     public AuthRequest(String email, String password) {
         this.email = email;

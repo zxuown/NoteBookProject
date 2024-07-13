@@ -10,21 +10,14 @@ import com.example.notebook.dto.JwtUtil;
 
 @Service
 public class AuthService {
-    private final AuthenticationManager authenticationManager;
-
     private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthService(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
-        this.authenticationManager = authenticationManager;
+    public AuthService(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
-    public String authenticate(String email, String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password)
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    public String authenticate(String email) {
         return jwtUtil.generateToken(email);
     }
 }

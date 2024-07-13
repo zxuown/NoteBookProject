@@ -110,5 +110,28 @@ public class UserService {
             }
         });
     }
+
+    public void updateUser(AuthorizationCallback authorizationCallback){
+        Call<String> call = NetworkService.getInstance().getApi()
+                .updateUser("Bearer " + sharedPreferences.getString("token", null), currentUser);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> registerCall, Response<String> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("MyLocaleServer","updateUser body " + response.body());
+                    authorize(response.body(), authorizationCallback);
+                } else {
+                    Log.d("MyLocaleServer", "updateUser failed");
+                    authorizationCallback.onAuthorizationFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("MyLocaleServer", "updateUser error: " + t.getMessage());
+                authorizationCallback.onAuthorizationFailed();
+            }
+        });
+    }
 }
 

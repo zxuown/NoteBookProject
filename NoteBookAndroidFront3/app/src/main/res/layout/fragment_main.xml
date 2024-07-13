@@ -5,25 +5,71 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+   <LinearLayout
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:padding="8dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:id="@+id/NoteBooksHeaders">
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#4CAF50"
+          android:gravity="center"
+          android:textSize="18sp"
+          android:text="Title"
+          android:textStyle="bold" />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#8C4CAF"
+          android:gravity="center"
+          android:textSize="18sp"
+          android:text="Description"
+          android:textStyle="bold" />
+   </LinearLayout>
+
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/rvNoteBooks"
        android:layout_width="0dp"
        android:layout_height="0dp"
        android:layout_marginStart="1dp"
-       android:layout_marginTop="1dp"
+       android:layout_marginTop="8dp"
        android:layout_marginEnd="1dp"
        android:layout_marginBottom="8dp"
        app:layout_constraintBottom_toTopOf="@+id/btnAddNoteBook"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
+       app:layout_constraintTop_toBottomOf="@+id/NoteBooksHeaders" />
+<TextView
+    android:id="@+id/tvInfo"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="#FFC107"
+    android:gravity="center"
+    android:textSize="18sp"
+    android:text="Swipe to the right to edit or swipe to the left to delete"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/btnAddNoteBook"
+    app:layout_constraintTop_toBottomOf="@+id/rvNoteBooks"
+    />
 
    <Button
        android:id="@+id/btnAddNoteBook"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="Add note book"
-       app:layout_constraintTop_toBottomOf="@+id/rvNoteBooks"
+       app:layout_constraintTop_toBottomOf="@+id/tvInfo"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"

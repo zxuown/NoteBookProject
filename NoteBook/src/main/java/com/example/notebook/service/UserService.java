@@ -49,6 +49,13 @@ public class UserService implements UserDetailsService {
         return loadUserByUsername(currentPrincipalName);
     }
 
+    public void update(User user, boolean bCryptPass){
+        if(bCryptPass){
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }
+        userRepository.save(user);
+    }
+
     public void create(String email, String password)
     {
         User user = new User();

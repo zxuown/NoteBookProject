@@ -7,29 +7,21 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class User {
-    @Expose
-    @SerializedName("id")
+
     private int id;
-    @Expose
-    @SerializedName("username")
+
     private String username;
-    @Expose
-    @SerializedName("password")
+
     private String password;
-    @Expose
-    @SerializedName("accountNonExpired")
+
     private boolean accountNonExpired;
-    @Expose
-    @SerializedName("accountNonLocked")
+
     private boolean accountNonLocked;
-    @Expose
-    @SerializedName("enabled")
+
     private boolean enabled;
-    @Expose
-    @SerializedName("authorities")
+
     private List<String> authorities;
-    @Expose
-    @SerializedName("credentialsNonExpired")
+
     private boolean credentialsNonExpired;
 
     public User(String username, String password) {

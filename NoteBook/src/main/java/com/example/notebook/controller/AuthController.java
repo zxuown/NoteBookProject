@@ -3,13 +3,11 @@
 
     import com.example.notebook.dto.AuthRequest;
     import com.example.notebook.dto.JwtUtil;
-    import com.example.notebook.dto.LoginRequest;
-    import com.example.notebook.dto.RegistrationRequest;
     import com.example.notebook.entity.User;
     import com.example.notebook.service.AuthService;
     import com.example.notebook.service.UserService;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.http.ResponseEntity;
+    import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
     import org.springframework.web.bind.annotation.*;
 
     @RestController
@@ -28,7 +26,11 @@
 
         @PostMapping("/auth/login")
         public String submitLogin(@RequestBody AuthRequest request) {
-            return authService.authenticate(request.getEmail(), request.getPassword());
+            if (new BCryptPasswordEncoder().matches(request.getPassword(),
+                    userService.loadUserByUsername(request.getEmail()).getPassword())){
+                return authService.authenticate(request.getEmail());
+            }
+            return null;
         }
 
         @GetMapping("/auth/user/token/{userToken}")
@@ -43,6 +45,8 @@
             }
 
             userService.create(request.getEmail(), request.getPassword());
-            return authService.authenticate(request.getEmail(), request.getPassword());
+            return  authService.authenticate(request.getEmail());
         }
+
+
     }

@@ -26,6 +26,8 @@ public class MainFragment extends Fragment {
     private RecyclerView rvNoteBooks;
     public static NoteBookAdapter noteBookAdapter;
 
+    public boolean deletedButtonClicked = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -35,7 +37,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onNoteBookLoaded(List<NoteBook> noteBooks) {
                 Toast.makeText(getContext(), "Good load note books", Toast.LENGTH_SHORT).show();
-                noteBookAdapter = new NoteBookAdapter(getContext(), R.layout.item_list, noteBooks);
+                noteBookAdapter = new NoteBookAdapter(getContext(), R.layout.item_list, noteBooks, MainFragment.this);
                 rvNoteBooks.setAdapter(noteBookAdapter);
 
                 LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
@@ -83,11 +85,16 @@ public class MainFragment extends Fragment {
         builder.setMessage("Are you sure you want to delete this notebook? " + noteBook.getId())
                 .setPositiveButton("Yes", (dialog, id) -> {
                     NoteBookService.getInstance().deleteNoteBook(noteBook.getId());
-                    noteBookAdapter.notifyItemRemoved(position);
                 })
                 .setNegativeButton("No", (dialog, id) -> {
                     noteBookAdapter.notifyItemChanged(position);
+                    deletedButtonClicked = true;
                     dialog.dismiss();
+                }).setOnDismissListener(dialog -> {
+                    if (!deletedButtonClicked){
+                        noteBookAdapter.notifyItemChanged(position);
+                    }
+                    deletedButtonClicked = false;
                 });
         builder.create().show();
     }
@@ -98,13 +105,19 @@ public class MainFragment extends Fragment {
                 .setPositiveButton("Yes", (dialog, id) -> {
                     NoteBookDialog noteBookDialog = new NoteBookDialog();
                     Bundle args = new Bundle();
-                    args.putSerializable("noteBook", (Serializable) noteBook);
+                    args.putSerializable("noteBook", noteBook);
                     noteBookDialog.setArguments(args);
                     noteBookDialog.show(MainFragment.this.getChildFragmentManager(), "noteBook");
                 })
                 .setNegativeButton("No", (dialog, id) -> {
                     noteBookAdapter.notifyItemChanged(position);
+                    deletedButtonClicked = true;
                     dialog.dismiss();
+                }).setOnDismissListener(dialog -> {
+                    if (!deletedButtonClicked){
+                        noteBookAdapter.notifyItemChanged(position);
+                    }
+                    deletedButtonClicked = false;
                 });
         builder.create().show();
     }

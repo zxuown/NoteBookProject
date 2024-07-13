@@ -21,7 +21,7 @@
         android:background="#FFC107"
         android:ems="10"
         android:hint="description"
-        android:inputType="phone" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btnSave"

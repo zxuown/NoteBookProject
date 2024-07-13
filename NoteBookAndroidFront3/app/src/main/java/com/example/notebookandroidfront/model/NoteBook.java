@@ -3,18 +3,16 @@ package com.example.notebookandroidfront.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class NoteBook {
-    @Expose
-    @SerializedName("id")
+import java.io.Serializable;
+
+public class NoteBook implements Serializable {
+
     private int id;
-    @Expose
-    @SerializedName("title")
+
     private String title;
-    @Expose
-    @SerializedName("description")
+
     private String description;
-    @Expose
-    @SerializedName("user")
+
     private  User user;
 
     public NoteBook(String title, String description, User user) {
